@@ -1,0 +1,30 @@
+# Datasets (downloaded separately from Google Drive)
+bank_statements_dataset/
+synthetic_bank_statement_dataset_100/
+bank_statements_dataset_1000_real/
+bank_statements_dataset_500/
+vlm_training_dataset/
+*.zip
+
+# Training outputs
+qwen_vlm_finetuned/
+results/
+*.safetensors
+*.bin
+checkpoint-*/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Notebooks
+.ipynb_checkpoints/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/

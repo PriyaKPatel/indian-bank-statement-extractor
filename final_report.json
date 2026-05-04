@@ -1,0 +1,76 @@
+{
+  "project": "Bilingual Indian Financial Document Extractor",
+  "model": "unsloth/Qwen2.5-VL-3B-Instruct",
+  "method": "Unsloth LoRA (r=128, rsLoRA=True)",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition (102 GB)",
+  "dataset": {
+    "train": 2355,
+    "val": 283,
+    "test": 275,
+    "sources": "1,300 synthetic Indian bank statements across DS1+DS2+DS3",
+    "languages": "English, Hindi (Devanagari), Gujarati",
+    "bank_formats": "12 real Indian banks (SBI/HDFC/ICICI/Axis/PNB/BOB/Kotak/Canara/UBI/BOI/IndusInd/MUCB) + 4 fictional banks across 4 layouts"
+  },
+  "training": {
+    "epochs": 3,
+    "effective_batch": 16,
+    "learning_rate": 5e-05,
+    "quantization": "16-bit",
+    "precision": "bf16"
+  },
+  "results": {
+    "baseline": {
+      "json_rate": 95.0,
+      "header_avg": 70.8043630581831,
+      "field_scores": {
+        "bank_name": 95.0,
+        "account_holder_name": 64.83870967741936,
+        "account_number": 44.81481481481481,
+        "ifsc": 79.76190476190477,
+        "account_type": 80.0,
+        "opening_balance": 41.43692564745197,
+        "closing_balance": 37.89473684210527
+      },
+      "txn_count": 84.82014979905006,
+      "txn_date": 0.0,
+      "txn_amount": 41.61439343535356,
+      "txn_desc": 44.06904092446437,
+      "txn_balance": 28.263825623216743,
+      "avg_time": 55.009810745716095,
+      "bilingual_header": 71.3450292397661,
+      "synthetic_header": 70.70895137908022
+    },
+    "finetuned": {
+      "json_rate": 100.0,
+      "header_avg": 75.32380952380952,
+      "field_scores": {
+        "bank_name": 100.0,
+        "account_holder_name": 100.0,
+        "account_number": 44.800000000000004,
+        "ifsc": 100.0,
+        "account_type": 85.0,
+        "opening_balance": 100.0,
+        "closing_balance": 75.0
+      },
+      "txn_count": 92.19126504356684,
+      "txn_date": 75.23344580822403,
+      "txn_amount": 57.693649313722716,
+      "txn_desc": 59.85805069867398,
+      "txn_balance": 50.99865896820906,
+      "avg_time": 59.570056760311125,
+      "bilingual_header": 72.22222222222221,
+      "synthetic_header": 75.87114845938375
+    },
+    "improvement": {
+      "header_accuracy": "+4.5pp",
+      "json_parse_rate": "+5.0pp",
+      "txn_amount_accuracy": "+16.1pp",
+      "txn_description_sim": "+15.8pp"
+    },
+    "indic_gap": {
+      "baseline": "5.4pp",
+      "finetuned": "0.0pp",
+      "reduction": "5.4pp"
+    }
+  }
+}
